@@ -43,7 +43,7 @@ export default function Navbar2() {
         search.setIsSearchOpen();
         break;
       case 'Enter':
-        if(search.userInput){
+        if (search.userInput) {
           search.initSearch();
         }
         search.setIsSearchOpen();
@@ -64,7 +64,7 @@ export default function Navbar2() {
   };
 
   const toggleSubMenu = () => {
-    setIsSubOpen(bol => !bol);
+    setIsSubOpen((bol) => !bol);
   };
 
   const closeSearchAndSub = () => {
@@ -73,11 +73,11 @@ export default function Navbar2() {
     search.clearUserInput();
   };
 
-  const onInputHandler = e => {
+  const onInputHandler = (e) => {
     search.setUserInput(e.currentTarget.value);
   };
 
-  const scrollHandler = e => {
+  const scrollHandler = (e) => {
     const currentScrollY = window.scrollY;
     if (prevScrollY.current < currentScrollY && goingUp) {
       setGoingUp(false);
@@ -112,7 +112,7 @@ export default function Navbar2() {
   );
 
   const toggleProfile = () => {
-    setProfileIsShown(bol => !bol);
+    setProfileIsShown((bol) => !bol);
   };
 
   useEventListener('scroll', scrollHandler);
@@ -121,18 +121,10 @@ export default function Navbar2() {
   return (
     <>
       {isModal && (
-        <ModalBackdrop
-          composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />}
-          open={isModal}
-          onClose={() => setIsModal(false)}
-        />
+        <ModalBackdrop composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />} open={isModal} onClose={() => setIsModal(false)} />
       )}
 
-      <div
-        className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${
-          !showNav && 'navbar2__container--hidden'
-        }`}
-      >
+      <div className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${!showNav && 'navbar2__container--hidden'}`}>
         <nav className='navbar2__innercontainer generic-container'>
           <NavLink to='/'>
             <img className='navbar2_logo' src={logo} alt='logo' onClick={closeSearchAndSub} />
@@ -146,7 +138,9 @@ export default function Navbar2() {
                 </NavLink>
               </li>
               <li>
-                <div className={`navbar2__link flex items-center gap-2 ${location.pathname.includes('category') && 'active'}`} onClick={toggleSubMenu}>
+                <div
+                  className={`navbar2__link flex items-center gap-2 ${location.pathname.includes('category') && 'active'}`}
+                  onClick={toggleSubMenu}>
                   <span>Participer aux activités</span>
                   <FaChevronDown />
                 </div>
@@ -192,7 +186,7 @@ export default function Navbar2() {
                   }}
                   goToProfile={() => {
                     closeSearchAndSub();
-                    navigate('/dashboard/user');
+                    navigate('/dashboard/userV2');
                   }}
                   logOut={() => {
                     closeSearchAndSub();

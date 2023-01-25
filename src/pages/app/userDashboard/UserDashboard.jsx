@@ -25,7 +25,7 @@ export default function UserDashboard() {
     },
     {
       title: 'Profil',
-      path: './user',
+      path: './userV2',
       isSelected: false,
     },
     {
@@ -78,7 +78,7 @@ export default function UserDashboard() {
             <DashboardCard title='Mes notifications' icon={notifIcon} path='./notification' isDisabled />
           </div>
           <div className='z-20 my-3 mx-10'>
-            <DashboardCard title='Mon compte' icon={userIcon} path='./user' />
+            <DashboardCard title='Mon compte' icon={userIcon} path='./userV2' />
           </div>
         </article>
       </section>

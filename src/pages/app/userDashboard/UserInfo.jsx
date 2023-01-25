@@ -103,7 +103,7 @@ const UserInfo = () => {
 
   useEffect(() => {
     console.log('User data : ', data);
-    if (data) setUser(data.getUserById)
+    if (data) setUser(data.getUserById);
   }, [data]);
 
   // détermine la photo de profil enfant
@@ -131,7 +131,7 @@ const UserInfo = () => {
     },
     {
       title: 'Profil',
-      path: './user',
+      path: './userV2',
       isSelected: true,
     },
     {

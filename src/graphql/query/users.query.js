@@ -88,9 +88,9 @@ export const GET_BY_ID = gql`
         }
       }
       children {
-        age
-        gender
         name
+        gender
+        birthdate
       }
       description
       adress {

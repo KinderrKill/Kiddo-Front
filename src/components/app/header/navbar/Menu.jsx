@@ -24,7 +24,7 @@ const titleProp = navigationHeader.titleProp;
 
 export default function Menu() {
   const { isAuth, _id, loggedOut } = useAuthContext();
-    
+
   const navigate = useNavigate();
 
   return (
@@ -99,8 +99,8 @@ export default function Menu() {
                       </button>
                       <button
                         onClick={() => {
-                          navigate('/dashboard/user');
-                        }} 
+                          navigate('/dashboard/userV2');
+                        }}
                         className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'>
                         Mon Profil
                       </button>

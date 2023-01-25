@@ -93,7 +93,7 @@ export const MODIFY_USER_INFO = gql`
       children {
         name
         gender
-        age
+        birthdate
       }
     }
   }

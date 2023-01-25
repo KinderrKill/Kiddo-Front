@@ -21,7 +21,7 @@ export default function UserDashboardNotification() {
     },
     {
       title: 'Profil',
-      path: '../dashboard/user',
+      path: '../dashboard/userV2',
       isSelected: false,
     },
     {

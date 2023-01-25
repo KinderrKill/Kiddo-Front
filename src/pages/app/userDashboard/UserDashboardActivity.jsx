@@ -49,7 +49,7 @@ export default function UserDashboardActivity() {
     },
     {
       title: 'Profil',
-      path: '../dashboard/user',
+      path: '../dashboard/userV2',
       isSelected: false,
     },
     {

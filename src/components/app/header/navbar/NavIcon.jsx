@@ -6,14 +6,22 @@ import useAuthContext from '../../../../hooks/useAuthContext';
 import ISearch from '../../../shared/icons/ISearch';
 import ProfileMenu from './ProfileMenu';
 
-export default function NavIcon({ 
-  navIcon, isSearchOpen, closeSearch, closeSearchAndSub, profileIsShown, setIsModal, onInputHandler, showSearchInputHandler, userInput, toggleProfile
+export default function NavIcon({
+  navIcon,
+  isSearchOpen,
+  closeSearch,
+  closeSearchAndSub,
+  profileIsShown,
+  setIsModal,
+  onInputHandler,
+  showSearchInputHandler,
+  userInput,
+  toggleProfile,
 }) {
-  
   const { isAuth, _id, loggedOut } = useAuthContext();
-    
+
   const navigate = useNavigate();
-  
+
   return (
     <div className={`navbar2__icongroup ${isSearchOpen && 'navbar2__icongroup--grow '}`}>
       {navIcon.map((item, index) => {
@@ -34,7 +42,7 @@ export default function NavIcon({
                       }}
                       goToProfile={() => {
                         closeSearchAndSub();
-                        navigate('dashboard/user');
+                        navigate('dashboard/userV2');
                       }}
                       logOut={() => {
                         closeSearchAndSub();
@@ -47,27 +55,24 @@ export default function NavIcon({
                   <item.icon className='navbar2__icon' onClick={() => setIsModal(true)} />
                 )}
               </>
-              
             ) : item === navIcon[0] ? (
               <>
-                {
-                  isSearchOpen ? (
-                    <div className='navbar2__searchinput-container'>
-                      <input
-                        className='navbar2__searchinput focus:ring-0'
-                        type='text'
-                        autoFocus
-                        placeholder='Trouver une activité...'
-                        value={userInput}
-                        onChange={onInputHandler}
-                      />
-                      <item.icon onClick={showSearchInputHandler} className='navbar2__icon--searchinput' />
-                      <FaTimesCircle onClick={closeSearch} className='navbar2__icon--searchinputleft' />
-                    </div>
-                    ) : (
-                      <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />
-                  )
-                }
+                {isSearchOpen ? (
+                  <div className='navbar2__searchinput-container'>
+                    <input
+                      className='navbar2__searchinput focus:ring-0'
+                      type='text'
+                      autoFocus
+                      placeholder='Trouver une activité...'
+                      value={userInput}
+                      onChange={onInputHandler}
+                    />
+                    <item.icon onClick={showSearchInputHandler} className='navbar2__icon--searchinput' />
+                    <FaTimesCircle onClick={closeSearch} className='navbar2__icon--searchinputleft' />
+                  </div>
+                ) : (
+                  <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />
+                )}
               </>
             ) : (
               <NavLink key={index} to={item.href} className='nav__icon-link' onClick={closeSearchAndSub}>
@@ -79,5 +84,5 @@ export default function NavIcon({
         );
       })}
     </div>
-  )
+  );
 }

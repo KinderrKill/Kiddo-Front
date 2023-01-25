@@ -40,14 +40,16 @@ import Signalement from './pages/administration/sections/Report';
 
 // Import CSS
 import './style.css';
+import UserInfoV2 from './pages/app/userDashboard/UserInfoV2';
 
 let isAdmin = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log("Launch REACT Project with NODE_ENV :", process.env.NODE_ENV);
-console.log("Front URL is : ", (process.env.REACT_APP_ENV === 'DEV'
-? process.env.REACT_APP_DEV_GRAPHQL_ENDPOINT
-: process.env.REACT_APP_PROD_GRAPHQL_ENDPOINT));
+console.log('Launch REACT Project with NODE_ENV :', process.env.NODE_ENV);
+console.log(
+  'Front URL is : ',
+  process.env.REACT_APP_ENV === 'DEV' ? process.env.REACT_APP_DEV_GRAPHQL_ENDPOINT : process.env.REACT_APP_PROD_GRAPHQL_ENDPOINT
+);
 
 root.render(
   // <React.StrictMode>
@@ -68,6 +70,7 @@ root.render(
             <Route path='/dashboard/fav' element={<UserLayout composant={<UserDashboardFav />} />} />
             <Route path='/dashboard/notification' element={<UserLayout composant={<UserDashboardNotification />} />} />
             <Route path='/dashboard/user' element={<UserLayout composant={<UserInfo />} />} />
+            <Route path='/dashboard/userV2' element={<UserLayout composant={<UserInfoV2 />} />} />
 
             <Route path='/search' element={<UserLayout composant={<SearchPage />} />} />
             {isAdmin && (

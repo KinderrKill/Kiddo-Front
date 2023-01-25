@@ -9,8 +9,7 @@ const Etiquette = ({ name, backgroundColor }) => {
       <div
         onClick={toggleActive}
         style={{ backgroundColor: backgroundColor }}
-        className="etiquette border-2 rounded-md p-4 select-none transition-all"
-      >
+        className='etiquette border-2 rounded-md p-4 select-none transition-all hover:scale-105 hover:cursor-pointer'>
         Activités {name}
       </div>
     </>
