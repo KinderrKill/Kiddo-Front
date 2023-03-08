@@ -1,6 +1,6 @@
 .admin-container {
   /* -64 equals navbar width */
-  @apply ml-64 w-screen flex flex-col justify-center content-center align-middle items-center;
+  @apply ml-64 px-8 w-screen flex flex-col justify-center content-center align-middle items-center;
 }
 
 .admin-section {

@@ -36,7 +36,10 @@ export default function EventPage() {
   const [displaySubModal, toggleSubModal] = useToggle(false);
 
   // fetchPolicy 'network-only' for getting event only on network for having modification
-  const { loading, error, data, refetch } = useQuery(GET_BY_ID, { variables: { eventId: eventId }, fetchPolicy: 'network-only' });
+  const { loading, error, data, refetch } = useQuery(GET_BY_ID, {
+    variables: { eventId: eventId },
+    fetchPolicy: 'network-only',
+  });
 
   const [fetchUser, { loading: userLoading, error: userError, data: userData }] = useLazyQuery(usersQuery.GET_BY_ID);
 
@@ -71,7 +74,8 @@ export default function EventPage() {
 
   const [isSubs, toggleSubs] = useToggle(false);
 
-  const [bookEvent, { error: bookEventError, loading: bookEventLoading, data: bookEventData }] = useMutation(BOOK_EVENT_2);
+  const [bookEvent, { error: bookEventError, loading: bookEventLoading, data: bookEventData }] =
+    useMutation(BOOK_EVENT_2);
 
   const handleSubsClick = () => {
     if (!authContext.isAuth) {
@@ -146,7 +150,9 @@ export default function EventPage() {
               <FaStar
                 className={
                   `ml-3 text-white bg-black bg-opacity-25 w-8 h-8 p-[6px] rounded-full hover:bg-kiddoGreen hover:text-yellow-300 hover:animate-spin transition-all` +
-                  (isPin ? 'bg-kiddoGreen hover:bg-black hover:text-yellow-300' : 'bg-black hover:bg-kiddoGreen hover:text-yellow-300')
+                  (isPin
+                    ? 'bg-kiddoGreen hover:bg-black hover:text-yellow-300'
+                    : 'bg-black hover:bg-kiddoGreen hover:text-yellow-300')
                 }
                 data-tip='Mettre en favoris'
                 onClick={handlePinClick}
@@ -172,8 +178,15 @@ export default function EventPage() {
                 line1={event.group_size + (event.group_size > 1 ? ' places' : ' place')}
                 line2={'A partir de ' + event.minChildAge + ' ans'}
               />
-              <CardInfo icon={faEuroSign} line1={event.price.child + '€ par enfant'} line2={event.price.adult + '€ par adulte'} />
-              <CardInfo icon={faClock} line1={dateManager.getTimeBetweenDates(event.event_date.start, event.event_date.end) + ' heures'} />
+              <CardInfo
+                icon={faEuroSign}
+                line1={event.price.child + '€ par enfant'}
+                line2={event.price.adult + '€ par adulte'}
+              />
+              <CardInfo
+                icon={faClock}
+                line1={dateManager.getTimeBetweenDates(event.event_date.start, event.event_date.end) + ' heures'}
+              />
             </article>
 
             {/* Bouton s'inscrire ou notification inscrit.e à l'activité */}
@@ -241,10 +254,12 @@ export default function EventPage() {
                       onClick={() => navigate(`/user/${event.main_owner._id}`)}
                     />
                     <span className='text-sm'>
+                      {console.log('MAIN OWNER : ', event.main_owner)}
                       {event.main_owner.first_name + ', ' + dateManager.getUserAge(event.main_owner.birthdate) + ' ans'}
                     </span>
                     <span className='text-sm'>
-                      {event.main_owner.children.length + (event.main_owner.children.length > 1 ? ' enfants' : ' enfant')}
+                      {event.main_owner.children.length +
+                        (event.main_owner.children.length > 1 ? ' enfants' : ' enfant')}
                     </span>
                   </div>
                 </div>
@@ -255,7 +270,9 @@ export default function EventPage() {
                   <MapLeafletOneMarker name={event.name} inputGPS={event.gps} className='bg-red-500' />
                 </div>
                 {/* Adresse */}
-                <p className='text-center mt-2'>Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville</p>
+                <p className='text-center mt-2'>
+                  Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville
+                </p>
               </article>
             </div>
 
@@ -315,7 +332,9 @@ export default function EventPage() {
                   <h2 className='mt-5 mb-5 font-medium text-4xl'>Participants </h2>
                   <div className='flex items-center'>
                     <FaInfo className='w-6 h-6 p-1 border-2 border-kiddoPurple rounded-full text-kiddoPurple mr-2' />
-                    <span className='text-sm'>Plus que {event.group_size - event.group_participants.length} places</span>
+                    <span className='text-sm'>
+                      Plus que {event.group_size - event.group_participants.length} places
+                    </span>
                   </div>
                 </article>
                 <article className='flex items-center justify-center py-10'>
@@ -328,7 +347,11 @@ export default function EventPage() {
                   })}
                 </article>
               </section>
-              <CommentSection commentTarget={1} targetID={eventId} sectionName='Questions-réponses concernant l’activité' />
+              <CommentSection
+                commentTarget={1}
+                targetID={eventId}
+                sectionName='Questions-réponses concernant l’activité'
+              />
             </>
           )}
         </div>
@@ -337,7 +360,9 @@ export default function EventPage() {
           <h2 className='text-center mt-10'>Chargement en cours...</h2>
         </div>
       ) : (
-        error && <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
+        error && (
+          <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
+        )
       )}
     </>
   );

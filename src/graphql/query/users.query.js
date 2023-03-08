@@ -5,12 +5,7 @@ export const GET_ALL = gql`
     users {
       _id
       created_at
-      updated_at
       email
-      profil_picture {
-        hd
-        thumbnail
-      }
     }
   }
 `;
@@ -90,7 +85,7 @@ export const GET_BY_ID = gql`
       children {
         name
         gender
-        birthdate
+        age
       }
       description
       adress {

@@ -41,20 +41,15 @@ export default function UserInfoV2() {
     // Fetch User data
     if (authContext._id !== '') {
       if (!loadingUserData && user.email) {
-        console.log('USER ALREADY FETCHED', user);
         refetch();
       } else if (!loadingUserData && !dataUserData) {
-        //refetch
-        console.log('FIRST FETCH USER ', user);
         fetchUser({ variables: { id: authContext._id } });
       }
     }
 
     //if (loadingUserData) console.log('loadingUserData : ', loadingUserData);
     if (errorUserData) console.log('errorUserData : ', errorUserData);
-    if (dataUserData) {
-      setUser(dataUserData.getUserById);
-    }
+    if (dataUserData) setUser(dataUserData.getUserById);
 
     // Modify User data
     //if (loadingModifyUser) console.log('loadingModifyUser : ', loadingModifyUser);
@@ -360,7 +355,7 @@ export default function UserInfoV2() {
                         type='date'
                         placeholder='Date de naissance'
                         defaultValue={user.children[index].birthdate || ''}
-                        onChange={(e) => handleChildrenInput(e, index, 'birthdate', children)}
+                        onChange={(e) => handleChildrenInput(e, index, 'age', children)}
                         className='rounded-xl mb-2 border-gray-200'
                       />
                     </div>

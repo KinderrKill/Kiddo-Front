@@ -1,5 +1,35 @@
 import { gql } from '@apollo/client';
 
+export const GET_BY_ID = gql`
+  query Query($commentId: ObjectID!) {
+    comment(id: $commentId) {
+      content {
+        message
+      }
+      sender {
+        first_name
+        email
+      }
+      signalments {
+        sender {
+          first_name
+        }
+        signaled_at
+        signalment {
+          name
+        }
+      }
+      modified_at
+      deleted_at
+      created_at
+      _id
+      target_event {
+        _id
+      }
+    }
+  }
+`;
+
 export const GET_BY_TARGET_ID = gql`
   query Query($type: Int!, $id: ObjectID!) {
     getByTargetId(type: $type, id: $id) {

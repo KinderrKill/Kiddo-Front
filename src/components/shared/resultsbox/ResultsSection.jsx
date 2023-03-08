@@ -1,58 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import useToggle from '../../../hooks/useToggle';
+import React, { useState, useEffect } from 'react'
+import { useLazyQuery } from '@apollo/client'
+import { Link } from 'react-router-dom'
+import useToggle from '../../../hooks/useToggle'
 
 // import custom components
-import { GET_EVENTS_CATEGORY } from '../../../graphql/query/events.query';
-import MapLeaflet, { MapLeafletPlaceHolder } from '../../../components/shared/MapLeaflet';
-import LoadIconBtn from '../../../components/shared/loadingfiles/LoadIconBtn';
-import ActivityCard from '../../../components/shared/card/ActivityCard';
-import getGeoLoc from '../../../utils/getGeoLoc';
-import PaginationComp from '../../../components/shared/PaginationComp';
-import Skelet from '../../../components/shared/loadingfiles/Skelet';
-import Filterbox from '../../../components/shared/filterbox/Filterbox';
-import getCity from '../../../utils/getCity';
+import { GET_EVENTS_CATEGORY } from '../../../graphql/query/events.query'
+import MapLeaflet, { MapLeafletPlaceHolder } from '../../../components/shared/MapLeaflet'
+import LoadIconBtn from '../../../components/shared/loadingfiles/LoadIconBtn'
+import ActivityCard from '../../../components/shared/card/ActivityCard'
+import getGeoLoc from '../../../utils/getGeoLoc'
+import PaginationComp from '../../../components/shared/PaginationComp'
+import Skelet from '../../../components/shared/loadingfiles/Skelet'
+import Filterbox from '../../../components/shared/filterbox/Filterbox'
+import getCity from '../../../utils/getCity'
 
-import { FaCrosshairs, FaFilter } from 'react-icons/fa';
+import { FaCrosshairs, FaFilter } from 'react-icons/fa'
 
 //import CSS
-import './resultssection.css';
+import './resultssection.css'
 
 export default function ResultsSection({ categoryId, categoryName, searchInput }) {
-  const ITEMS_PER_PAGE = 12;
+  const ITEMS_PER_PAGE = 12
 
-  const [showFilter, toggleFilterVisibility] = useToggle(false);
+  const [showFilter, toggleFilterVisibility] = useToggle(false)
 
-  const [maxDistMeters, setMaxDistMeters] = useState(200000);
-  const [minChildAge, setMinChildAge] = useState(0);
-  const [maxChildAge, setMaxChildAge] = useState(12);
+  const [maxDistMeters, setMaxDistMeters] = useState(200000)
+  const [minChildAge, setMinChildAge] = useState(0)
+  const [maxChildAge, setMaxChildAge] = useState(12)
 
-  const [allResults, setAllResults] = useState([]);
+  const [allResults, setAllResults] = useState([])
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
   const [geoLoc, setGeoLoc] = useState({
     isLoading: false,
     coords: null,
     isGeoLoc: false,
     city: null,
-  });
+  })
 
   // GraphQl Request
   // eslint-disable-next-line no-unused-vars
-  const [getEvents, { loading, data, refetch }] = useLazyQuery(GET_EVENTS_CATEGORY);
-  const [getAllEvents, { data: dataAll }] = useLazyQuery(GET_EVENTS_CATEGORY);
+  const [getEvents, { loading, data, refetch }] = useLazyQuery(GET_EVENTS_CATEGORY)
+  const [getAllEvents, { data: dataAll }] = useLazyQuery(GET_EVENTS_CATEGORY)
+
+  // Date debug
+  const fakeDate = new Date(2022, 6, 13, 12, 0, 0).getTime()
 
   useEffect(() => {
-    console.log(dataAll);
+    console.log(dataAll)
     if (dataAll) {
-      setAllResults(() => [...dataAll.eventsComplexQuery.results]);
+      setAllResults(() => [...dataAll.eventsComplexQuery.results])
     }
-  }, [dataAll]);
+  }, [dataAll])
 
   useEffect(() => {
-    setPage(1);
-  }, [minChildAge, maxChildAge, maxDistMeters]);
+    setPage(1)
+  }, [minChildAge, maxChildAge, maxDistMeters])
 
   useEffect(() => {
     getAllEvents({
@@ -60,7 +63,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         input: {
           categories: categoryId,
           status: 'PUBLISHED',
-          minDate: Date.now(),
+          minDate: fakeDate,
           dateOrder: 'asc',
           searchInput: searchInput,
           minChildAge: minChildAge,
@@ -70,9 +73,9 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           maxDistMeters: maxDistMeters,
         },
       },
-    });
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
+  }, [categoryId, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput])
 
   useEffect(() => {
     // if (!data) {
@@ -84,7 +87,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           categories: categoryId,
           searchInput: searchInput,
           status: 'PUBLISHED',
-          minDate: Date.now(),
+          minDate: fakeDate,
           dateOrder: 'asc',
           minChildAge: minChildAge,
           maxChildAge: maxChildAge,
@@ -93,7 +96,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           maxDistMeters: maxDistMeters,
         },
       },
-    });
+    })
     // }
 
     // if (data) {
@@ -115,32 +118,32 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
     //   });
     // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
+  }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput])
 
   const onClickHandler = () => {
-    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
-    let gps;
+    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }))
+    let gps
 
     getGeoLoc()
       .then((res) => {
-        gps = res;
-        return getCity(res[1], res[0]);
+        gps = res
+        return getCity(res[1], res[0])
       })
       .then((res) => {
-        setMaxDistMeters(200000);
+        setMaxDistMeters(200000)
         return setGeoLoc((geoLoc) => ({
           ...geoLoc,
           isLoading: false,
           isGeoLoc: true,
           coords: gps,
           city: res,
-        }));
+        }))
       })
       .catch((err) => {
-        alert(err.message);
-        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false, isGeoLoc: false, city: null }));
-      });
-  };
+        alert(err.message)
+        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false, isGeoLoc: false, city: null }))
+      })
+  }
 
   return (
     <>
@@ -160,13 +163,19 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
             <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3'>
               {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaFilter className='text-sm ' />}
 
-              <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2 text-left' disabled={loading}>
+              <button
+                onClick={data && toggleFilterVisibility}
+                className='z-20 w-full hover:underline py-2 text-left'
+                disabled={loading}>
                 Critères de recherche
               </button>
 
               {showFilter && (
                 <Filterbox
-                  className={'absolute top-12 left-6 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
+                  className={
+                    'absolute top-12 left-6 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' +
+                    (showFilter ? '' : 'filterbox__hidden')
+                  }
                   maxDist={maxDistMeters}
                   setMaxDist={setMaxDistMeters}
                   minChildAge={minChildAge}
@@ -207,13 +216,17 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
                     img={data.content_media.photo_main_url}
                   />
                 </Link>
-              );
+              )
             })
           )}
         </article>
 
         <article className='text-center col-span-2 lg:col-span-1 mb-10'>
-          {data ? <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} /> : <MapLeafletPlaceHolder />}
+          {data ? (
+            <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} />
+          ) : (
+            <MapLeafletPlaceHolder />
+          )}
         </article>
       </section>
 
@@ -224,12 +237,12 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
             itemsPerPage={12}
             page={page}
             onPageClick={(page) => {
-              setPage(page);
-              window.scrollTo(0, 0);
+              setPage(page)
+              window.scrollTo(0, 0)
             }}
           />
         )}
       </section>
     </>
-  );
+  )
 }

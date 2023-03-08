@@ -42,9 +42,9 @@ function Navbar() {
     return (
       <>
         <div className='fixed w-64 h-screen translate-x-0 border-r-2 bg-cyan-200 border-cyan-400'>
-          <article className='flex items-center justify-center pb-4 mx-8 my-4 border-b-2'>
+          <article className='flex items-center pb-4 my-4 border-b-2'>
             <Link to='/'>
-              <img src={smallLogo} alt='' className='w-12 h-12 mr-2 transition-all hover:scale-105 hover:-rotate-6' />
+              <img src={smallLogo} alt='' className='ml-2 h-12 mr-2 transition-all hover:scale-105 hover:-rotate-6' />
             </Link>
 
             <div className='flex flex-col ml-1 text-black'>
@@ -70,7 +70,7 @@ function Navbar() {
             <div className='px-6 py-5 text-xl transition-all cursor-pointer hover:bg-fuchsia-400 hover:bg-opacity-50'>
               <Link to='/administration/users' onClick={(e) => console.log('Click')}>
                 <FontAwesomeIcon icon={faUser} className='mr-5' />
-                Utilisateur
+                Utilisateurs
               </Link>
             </div>
 

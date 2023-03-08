@@ -116,9 +116,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           {/* SECTION: Nom + Prénom et affichage date */}
           <div className='pt-2 ml-3 flex justify-between'>
             <p className='font-medium'>
-              {comment.sender.first_name !== null
-                ? comment.sender.first_name + (comment.sender.last_name !== null && ' ' + comment.sender.last_name)
-                : comment.sender.email}
+              {comment.sender.first_name != null ? comment.sender.first_name + ' ' + (comment.sender.last_name || '') : comment.sender.email}
             </p>
             <p className='mr-3 font-thin text-sm'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
           </div>
@@ -179,7 +177,11 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           </div>
 
           {/* MODAL : Signalement */}
-          <ModalBackdrop composant={<CommentSignalment user={user} comment={comment} />} open={modal} onClose={toggleModal} />
+          <ModalBackdrop
+            composant={<CommentSignalment user={user} comment={comment} closeModal={() => toggleModal(false)} />}
+            open={modal}
+            onClose={toggleModal}
+          />
         </article>
       </article>
 

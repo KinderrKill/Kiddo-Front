@@ -41,6 +41,8 @@ import Signalement from './pages/administration/sections/Report';
 // Import CSS
 import './style.css';
 import UserInfoV2 from './pages/app/userDashboard/UserInfoV2';
+import SignalmentPage from './pages/administration/sections/user/SignalmentPage';
+import UserProfilDemo from './pages/administration/sections/user/UserProfilDemo';
 
 let isAdmin = true;
 
@@ -48,7 +50,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 console.log('Launch REACT Project with NODE_ENV :', process.env.NODE_ENV);
 console.log(
   'Front URL is : ',
-  process.env.REACT_APP_ENV === 'DEV' ? process.env.REACT_APP_DEV_GRAPHQL_ENDPOINT : process.env.REACT_APP_PROD_GRAPHQL_ENDPOINT
+  process.env.REACT_APP_ENV === 'DEV'
+    ? process.env.REACT_APP_DEV_GRAPHQL_ENDPOINT
+    : process.env.REACT_APP_PROD_GRAPHQL_ENDPOINT
 );
 
 root.render(
@@ -58,28 +62,33 @@ root.render(
       <Router>
         <SearchContext>
           <Routes>
-            <Route path='/' element={<UserLayout composant={<HomePage />} />} />
-            <Route path='/kiddo' element={<UserLayout composant={<Kiddo />} />} />
-            <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
-            <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
-            <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
-            <Route path='/create-event' element={<UserLayout composant={<CreateEvents />} />} />
-            <Route path='*' element={<UserLayout composant={<NotFound />} />} />
-            <Route path='/dashboard' element={<UserLayout composant={<UserDashboard />} />} />
-            <Route path='/dashboard/activity' element={<UserLayout composant={<UserDashboardActivity />} />} />
-            <Route path='/dashboard/fav' element={<UserLayout composant={<UserDashboardFav />} />} />
-            <Route path='/dashboard/notification' element={<UserLayout composant={<UserDashboardNotification />} />} />
-            <Route path='/dashboard/user' element={<UserLayout composant={<UserInfo />} />} />
-            <Route path='/dashboard/userV2' element={<UserLayout composant={<UserInfoV2 />} />} />
+            <Route path='*' element={<UserLayout components={<NotFound />} />} />
+            <Route path='/' element={<UserLayout components={<HomePage />} />} />
+            <Route path='/kiddo' element={<UserLayout components={<Kiddo />} />} />
+            <Route path='/contact' element={<UserLayout components={<Contact />} />} />
+            <Route path='/event/:eventId' element={<UserLayout components={<EventPage />} />} />
+            <Route path='/category/:category' element={<UserLayout components={<CategoryPage />} />} />
+            <Route path='/create-event' element={<UserLayout components={<CreateEvents />} />} />
+            <Route path='/dashboard' element={<UserLayout components={<UserDashboard />} />} />
+            <Route path='/dashboard/activity' element={<UserLayout components={<UserDashboardActivity />} />} />
+            <Route path='/dashboard/fav' element={<UserLayout components={<UserDashboardFav />} />} />
+            <Route path='/dashboard/notification' element={<UserLayout components={<UserDashboardNotification />} />} />
+            <Route path='/dashboard/user' element={<UserLayout components={<UserInfo />} />} />
+            <Route path='/dashboard/userV2' element={<UserLayout components={<UserInfoV2 />} />} />
 
-            <Route path='/search' element={<UserLayout composant={<SearchPage />} />} />
+            <Route path='/search' element={<UserLayout components={<SearchPage />} />} />
             {isAdmin && (
               <Fragment>
-                <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
-                <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
-                <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
-                <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
-                <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
+                <Route path='/administration' element={<AdminLayout components={<AdminDashboard />} />} />
+                <Route path='/administration/users' element={<AdminLayout components={<AdminUser />} />} />
+                <Route path='/administration/users/:id' element={<AdminLayout components={<AdminUserProfil />} />} />
+                <Route path='/administration/reports' element={<AdminLayout components={<Signalement />} />} />
+                <Route path='/administration/reports/:id' element={<AdminLayout components={<SignalmentPage />} />} />
+                <Route
+                  path='/administration/userTest'
+                  element={<AdminLayout components={<AdminUserTestMutation />} />}
+                />
+                <Route path='/administration/userDemo' element={<AdminLayout components={<UserProfilDemo />} />} />
               </Fragment>
             )}
           </Routes>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import * as gqlQueryRequest from '../../../../graphql/query/users.query';
 import useToggle from '../../../../hooks/useToggle';
@@ -15,15 +15,16 @@ export default function UserProfil() {
   const returnArrowPath = '/administration/users';
 
   const [user, setUser] = useState();
+  const [error, setError] = useState();
+
   const [modifiedPanel, toggleModifiedPanel] = useToggle(false);
 
-  const url = window.location.href.split('/');
-  const userId = url[url.length - 1];
+  const { id } = useParams();
 
   useQuery(gqlQueryRequest.GET_BY_ID, {
-    variables: { id: userId },
+    variables: { id },
     onCompleted: (data) => setUser(data.getUserById),
-    onError: (err) => console.log('err : ', JSON.stringify(err, null, 4)),
+    onError: (err) => setError(err.message),
   });
 
   console.log(user);
@@ -42,23 +43,23 @@ export default function UserProfil() {
           <img src={profilPic} alt='' className='w-40 bg-fuchsia-300' />
           <article className='flex flex-col justify-center ml-4'>
             <span className='mb-3 text-xl font-bold'>
-              Bob Chenapan{' | '}
-              <FaPenAlt className='text-sm text-gray-500' />
+              Jean-Michel Dupont
+              {/* <FaPenAlt className='text-sm text-gray-500' />
               <span className='ml-2 text-sm transition-all cursor-pointer select-none hover:text-fuchsia-600' onClick={toggleModifiedPanel}>
                 {modifiedPanel ? 'Modifier' : 'Consulter'}
-              </span>
+              </span> */}
             </span>
             <div className='mb-3'>
-              <span className='mr-3'>
+              <span className='mr-3 flex'>
                 <FaMailBulk className='mr-2 text-fuchsia-600' />
-                totodu76@gmail.com
+                test10@gmail.com
               </span>
-              <span>
+              <span className='flex'>
                 <FaPhone className='mr-2 text-fuchsia-600' />
                 02.35.01.02.03
               </span>
             </div>
-            <span className='text-gray-500'>Adresse complète</span>
+            <span className='text-gray-500'>10 Cours de la République 76600 Le Havre</span>
           </article>
         </section>
 
@@ -103,22 +104,25 @@ function ProfilModifier() {
       <article className='admin-section'>
         <span className='admin-section__title'>Modification du profil</span>
 
-        <CustomInput label='Pseudo' setState={setInputValue} customWidth='w-[42rem]' />
+        <CustomInput label='JM76' setState={setInputValue} customWidth='w-[30rem]' />
         <div className='flex'>
-          <CustomInput label='Prénom' setState={setInputValue} />
-          <CustomInput label='Nom' setState={setInputValue} />
-          <CustomInput label='Genre' setState={setInputValue} />
+          <CustomInput label='Jean-Michel' setState={setInputValue} />
+          <CustomInput label='Dupont' setState={setInputValue} />
         </div>
 
         <div className='flex'>
-          <CustomInput label='Email' setState={setInputValue} />
-          <CustomInput label='Téléphone' setState={setInputValue} />
-          <CustomInput label='Profession' setState={setInputValue} />
+          <CustomInput label='Homme' setState={setInputValue} />
+          <CustomInput label='Développeur' setState={setInputValue} />
         </div>
 
-        <CustomInput label='Adresse' setState={setInputValue} customWidth='w-[42rem]' />
+        <div className='flex'>
+          <CustomInput label='test10@gmail.com' setState={setInputValue} />
+          <CustomInput label='02.35.01.02.03' setState={setInputValue} />
+        </div>
 
-        <button className='mt-10 table-edit-btn'>Enregistrer</button>
+        <CustomInput label='10 Cours de la République 76600 Le Havre' setState={setInputValue} customWidth='w-[30rem]' />
+
+        <button className='mt-10 table-edit-btn'>Modifier</button>
         <button className='mt-10 ml-3 table-delete-btn'>Supprimer le profil</button>
       </article>
 
@@ -137,9 +141,9 @@ function ProfilModifier() {
           </thead>
           <tbody className='bg-white'>
             <tr className='whitespace-nowrap'>
-              <td>child._id</td>
-              <td>child.name</td>
-              <td>child.age</td>
+              <td>0</td>
+              <td>Jean-Michel Junior</td>
+              <td>2 ans</td>
               <td className='px-6 py-4'>
                 <Link to='/administration/users' className='table-edit-btn'>
                   Modifier

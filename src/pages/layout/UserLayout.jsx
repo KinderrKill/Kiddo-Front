@@ -4,7 +4,7 @@ import Header from '../../components/app/header/Header';
 import { useState } from 'react';
 import useEventListener from '../../hooks/useEventListener';
 
-export default function UserLayout({ composant }) {
+export default function UserLayout({ components }) {
   const [isMobile, setIsMobile] = useState(false);
 
   const windowSizeHandler = () => {
@@ -15,9 +15,10 @@ export default function UserLayout({ composant }) {
 
   return (
     <>
-      {isMobile && <Header />}
-      {!isMobile && <Navbar2 />}
-      <div>{composant}</div>
+      {isMobile ? <Header /> : <Navbar2 />}
+
+      {/* Display child components */}
+      {components}
       <Footer />
     </>
   );

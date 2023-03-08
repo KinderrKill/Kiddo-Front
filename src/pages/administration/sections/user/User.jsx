@@ -6,6 +6,7 @@ import * as gqlQueryRequest from '../../../../graphql/query/users.query';
 
 // Import asset
 import { FaStepBackward } from 'react-icons/fa';
+import { UsersIcon } from '@heroicons/react/outline';
 
 export default function User() {
   const returnArrowPath = '/administration';
@@ -13,25 +14,25 @@ export default function User() {
   const [users, setUsers] = useState([]);
 
   useQuery(gqlQueryRequest.GET_ALL, {
-    onCompleted: (data) => setUsers(data.users),
+    onCompleted: (data) => {
+      setUsers(data.users);
+    },
     onError: (err) => console.log(JSON.stringify(err, null, 4)),
   });
 
   return (
     <div className='flex'>
       <div className='admin-container'>
-        <h2 className='self-start my-5 ml-5 text-2xl'>
+        <h2 className='flex items-center self-start my-5 ml-5 text-2xl'>
           <Link to={returnArrowPath}>
             <FaStepBackward className='transition-all cursor-pointer select-none hover:text-fuchsia-600' />
-          </Link>{' '}
-          | Gestion des utilisateurs
+          </Link>
+          | Gestion des utilisateurs ({users.length})
         </h2>
         <article className='section_tab'>
+          <span>|</span>
           <span>Consultation</span>
           <span>|</span>
-          <span>Item2</span>
-          <span>|</span>
-          <span>Item3</span>
         </article>
 
         <article className='flex-col mt-10'>
@@ -41,7 +42,6 @@ export default function User() {
                 <th>ID</th>
                 <th>Email</th>
                 <th>Crée le</th>
-                <th>Modifié le</th>
                 <th>Consulter</th>
                 <th>Supprimer</th>
               </tr>
@@ -51,8 +51,7 @@ export default function User() {
                 <tr key={index} className='text-center whitespace-nowrap'>
                   <td>{user._id}</td>
                   <td>{user.email}</td>
-                  <td>{user.created_at}</td>
-                  <td>{user.updated_at}</td>
+                  <td>{new Date(user.created_at).toLocaleString().replace(' ', ' à ')}</td>
                   <td className='px-6 py-4'>
                     <Link to={`/administration/users/${user._id}`} className='table-show-btn'>
                       Consulter
