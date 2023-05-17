@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Kiddo Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ce dépôt contient la partie frontend de l'application Kiddo, réalisée avec React et Tailwind CSS. 
+Il est responsable de l'interface utilisateur et de l'interaction avec l'API backend pour gérer les fonctionnalités liées aux rencontres entre parents et à l'organisation d'activités.
 
-## Available Scripts
+## Fonctionnalités
 
-In the project directory, you can run:
+- Interface utilisateur intuitive permettant aux utilisateurs de naviguer facilement et rapidement.
+- Affichage des annonces et des activités disponibles pour les parents.
+- Gestion des profils utilisateur et des informations personnelles.
+- Communication via des messages publics et privés avec d'autres parents.
+- Recherche et filtrage des rencontres et des activités en fonction de la proximité géographique.
 
-### `npm start`
+## Prérequis
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js et npm (ou yarn) doivent être installés localement.
+- L'API backend de Kiddo doit être en cours d'exécution.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Instructions d'installation et de configuration
 
-### `npm test`
+1. Clonez ou téléchargez ce dépôt sur votre machine locale.
+2. Dans le répertoire du projet, exécutez la commande `npm install` (ou `yarn install`) pour installer les dépendances.
+3. Créez un fichier `.env` à la racine du projet et configurez les variables d'environnement nécessaires, notamment l'URL de l'API backend.
+4. Exécutez la commande `npm start` (ou `yarn start`) pour démarrer l'application en mode développement.
+5. Accédez à `http://localhost:3000` dans votre navigateur pour afficher le site et interagir avec les fonctionnalités.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Structure du projet
 
-### `npm run build`
+- `/src` : Contient les fichiers source du frontend.
+  - `/assets` : Ressources graphiques
+  - `/components` : Composants réutilisables de l'application.
+  - `/context` : Contexte de l'application
+  - `/hooks` : Hook personnalisé
+  - `/pages` : Pages principales de l'application.
+  - `/utils` : Utilitaires et fonctions auxiliaires.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Auteurs
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ce projet a été réalisé par [E-Code](https://github.com/KinderrKill) et [Benjamin A](https://github.com/Baoufa).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Remarques
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- - C'est à la base un projet de fin de formation, celui-ci bien que fait en groupe à été repris à 90% par mes soins et une V2 est dans les tiroirs avec les technologies de Next et Nest.
+- Le projet utilise Tailwind CSS pour faciliter le développement et la personnalisation de l'interface utilisateur.
